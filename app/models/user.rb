@@ -10,6 +10,9 @@ class User < ActiveRecord::Base
   validates :password, :confirmation => true #password_confirmation attr
   validates_length_of :password, :in => 1..20, :on => :create
   
+  has_attached_file :avatar, styles: { medium: "600x600>", thumb: "300x300>" }, default_url: "/images/:style/missing.png"
+  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
+
   def self.authenticate(username_or_email = "", login_password = "")
     if  EMAIL_REGEX.match(username_or_email)    
       user = User.find_by_email(username_or_email)
