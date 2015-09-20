@@ -40,4 +40,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin]
 
 gem 'coffee-script-source', '1.8.0'
 
+gem 'mini_magick'
 gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
