@@ -34,7 +34,8 @@ class ArtworksController < ApplicationController
         format.html { render :new }
         format.json { render json: @artwork.errors, status: :unprocessable_entity }
       end
-   .require(:artwork).permit( :name, :description )
+    end
+  end
 
   # PATCH/PUT /artworks/1
   # PATCH/PUT /artworks/1.json
@@ -60,14 +61,13 @@ class ArtworksController < ApplicationController
     end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_artwork
-      @artwork = Artwork.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_artwork
+    @artwork = Artwork.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def artwork_params
-      params.require(:artwork).permit( :name, :description )
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def artwork_params
+    params.require(:artwork).permit(:name, :description)
+  end
 end
