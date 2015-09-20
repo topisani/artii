@@ -13,7 +13,7 @@
   <tbody>
     <% @users.each do |user| %>
       <tr>
-        <td><%= image_tag user.avatar.url(:thumb) %></td>
+        <td><%= image_tag user.avatar_url(:square_100) %></td>
         <td><%= user.email %></td>
         <td><%= user.username %></td>
         <td><%= link_to 'Show', user %></td>
