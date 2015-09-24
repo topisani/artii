@@ -1,0 +1,5 @@
+== bootstrap_form_for(@picture ) do |f|
+  == f.alert_message "Please fix the following #{'error'.pluralize(@picture.errors.count)} "
+  == f.dropzone_field :image
+  == f.text_field :name
+  == f.primary "Save Image"

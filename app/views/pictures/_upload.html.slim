@@ -1,0 +1,4 @@
+== form_for(@pictures.new, html: { :'data-type' => 'json', multipart: true, class: "dropzone"}) do |f|
+  .fallback
+    == f.file_field :image
+    == f.submit "Upload my Picture"

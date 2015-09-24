@@ -4,18 +4,18 @@ class ImageUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
 
   @@sizes = {
-    '2000' => 2048,
-    '1500' => 1500,
-    '1000' => 1024,
-    '500' => 512,
-    '250' => 256,
-    '100' => 128
+    "2000" => 2048,
+    "1500" => 1500,
+    "1000" => 1024,
+    "500" => 512,
+    "250" => 256,
+    "100" => 128
   }
 
   storage :file
-
+  after :remove, :delete_empty_upstream_dirs
   def store_dir
-    "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+    "uploads/users/#{model.user.id.to_s.underscore}/#{model.class.to_s.underscore}/#{model.id}"
   end
 
   def default_url
@@ -41,7 +41,7 @@ class ImageUploader < CarrierWave::Uploader::Base
       img.resize s.to_s + 'x' + s.to_s + '^^'
     end
   end
-  versions.each do |vname, _v|
+  versions.each do |vname, v|
     @@sizes.each do |sname, s|
       name = "#{vname}_#{sname}"
       version name, from_version: vname do
@@ -49,11 +49,23 @@ class ImageUploader < CarrierWave::Uploader::Base
       end
     end
   end
-
+  @@sizes.each do |xname,s|
+    n = "p#{xname}"
+    version n do
+      process resize_to_min: s
+    end
+  end
   def extension_white_list
   end
 
   def filename
-    'avatar.jpg' if original_filename
+    original_filename
   end
+
+def delete_empty_upstream_dirs
+  path = ::File.expand_path(store_dir, root)
+  Dir.delete(path) # fails if path not empty dir
+rescue SystemCallError
+  true # nothing, the dir is not empty
+end
 end

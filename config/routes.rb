@@ -6,15 +6,22 @@ Rails.application.routes.draw do
 
   resources :artworks
 
-  root :to => "sessions#login"
+  root :to => "sessions#home"
   get "signup", :to => "users#new"
   get "login", :to => "sessions#login"
   get "logout", :to => "sessions#logout"
   get "home", :to => "sessions#home"
   get "profile", :to => "sessions#profile"
-  post "login_attempt", :to => "sessions#login_attempt"  
+  get "settings", to: "sessions#settings"
+  post "login_attempt", :to => "sessions#login_attempt"
   resources :users
-  resources :galleries  # The priority is based upon order of creation: first created -> highest priority.
+  resources :galleries
+
+  get ":username/pictures", to: "pictures#index"
+  get ":username", to: "users#show"
+
+
+  # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"

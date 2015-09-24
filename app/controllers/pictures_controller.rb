@@ -1,10 +1,15 @@
 class PicturesController < ApplicationController
   before_action :set_picture, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user
+  before_action :check_user, only: [:edit, :update, :destroy, :create, :new]
 
   # GET /pictures
   # GET /pictures.json
   def index
-    @pictures = Picture.all
+    @pictures = (params[:username] != nil) ? User.find_by_username(params[:username]).pictures : Picture.all
+    if logged_in?
+      @picture = @current_user.pictures.new
+    end
   end
 
   # GET /pictures/1
@@ -14,7 +19,7 @@ class PicturesController < ApplicationController
 
   # GET /pictures/new
   def new
-    @picture = Picture.new
+    @picture = @current_user.pictures.new
   end
 
   # GET /pictures/1/edit
@@ -24,12 +29,12 @@ class PicturesController < ApplicationController
   # POST /pictures
   # POST /pictures.json
   def create
-    @picture = Picture.new(picture_params)
+    @picture = @current_user.pictures.new(picture_params)
 
     respond_to do |format|
       if @picture.save
         format.html { redirect_to @picture, notice: 'Picture was successfully created.' }
-        format.json { render :show, status: :created, location: @picture }
+        format.json { render json: { message: "success", fileID: @picture.id }, :status => 200}
       else
         format.html { render :new }
         format.json { render json: @picture.errors, status: :unprocessable_entity }
@@ -68,8 +73,14 @@ class PicturesController < ApplicationController
     @picture = Picture.find(params[:id])
   end
 
+  def check_user
+    unless logged_in?
+      redirect_to login_url
+    end
+  end
+
   # Never trust parameters from the scary internet, only allow the white list through.
   def picture_params
-    params.require(:picture).permit(:crop_height, :crop_width)
+    params.require(:picture).permit(:crop_height, :crop_width, :name, :image)
   end
 end

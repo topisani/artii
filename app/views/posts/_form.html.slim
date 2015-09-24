@@ -1,0 +1,3 @@
+== bootstrap_form_for(@post) do |f|
+  == f.alert_message "Please fix the following #{'error'.pluralize(@user.errors.count)} "
+  == f.submit
