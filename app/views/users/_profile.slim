@@ -1,0 +1,7 @@
+.ui.top.attached.segment.coverimage
+  .ui.fluid.top.image data-src=@user.cover_picture.image.url
+  .ui.attached.card.profilepicture
+    .content.image
+      img.ui.left.floated.image src=@user.avatar.image.url(:square_250)
+.ui.bottom.attached.segment
+  h1 == @user.username

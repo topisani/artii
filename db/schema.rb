@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150924055955) do
+ActiveRecord::Schema.define(version: 20151001064517) do
 
   create_table "artworks", force: true do |t|
     t.string   "name"
@@ -48,8 +48,7 @@ ActiveRecord::Schema.define(version: 20150924055955) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "avatar_id"
-    t.integer  "picture_id"
-    t.integer  "avatar"
+    t.integer  "cover_picture_id"
   end
 
 end

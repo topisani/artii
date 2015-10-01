@@ -1,0 +1,28 @@
+.ui.large.long.coupled.modal#picture-selector
+  .header 
+    | Pick image
+  i.right.floated.close.icon
+  .content.image
+    - @pictures = @current_user.pictures
+    == render 'pictures/index', locals: params
+  .actions
+    button.ui.basic.deny.button Cancel
+    button.ui.positive.right.floated.right.labeled.icon.button 
+      | Done
+      i.checkmark.icon
+    
+.ui.modal#picture-crop
+  .header
+    | Crop Image
+  i.right.floated.close.icon
+  .content.image
+    img#picture_image_cropbox
+    .ui.buttons
+      button.ui.button onclick="$('#picture_image_cropbox').cropper('setAspectRatio', NaN)" Free
+      button.ui.button onclick="$('#picture_image_cropbox').cropper('setAspectRatio', 1)" Square
+      button.ui.button onclick="$('#picture_image_cropbox').cropper('setAspectRatio', 16/9)" 16/9
+      button.ui.button onclick="$('#picture_image_cropbox').cropper('setAspectRatio', 4/3)" 4/3
+  .actions
+    button.ui.positive.right.labeled.icon.button onclick="$('#image-picker-form').submit()"
+      | Save
+      i.checkmark.icon

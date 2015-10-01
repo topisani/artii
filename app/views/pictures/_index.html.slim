@@ -1,5 +1,3 @@
-== bootstrap_form_for update_user_path(@user) + ".json", method: "put", html: {id: "image-picker-form"} do |f|
-    select.image-picker.masonry name="user[avatar.id]" multiple=false
-      - @current_user.pictures.each do |picture|
-        option value="#{picture.id}" data-img-src="#{picture.image_url(:p250)}" = picture.id
-    == f.submit
+select.image-picker name="image-picker-select"
+  - @current_user.pictures.each do |picture|
+    option value="#{picture.id}" data-img-src=picture.image_url(:square_500) data-date=picture.created_at.strftime("%d. %b %Y") data-img-label=picture.name = picture.id

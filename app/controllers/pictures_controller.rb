@@ -7,9 +7,6 @@ class PicturesController < ApplicationController
   # GET /pictures.json
   def index
     @pictures = (params[:username] != nil) ? User.find_by_username(params[:username]).pictures : Picture.all
-    if logged_in?
-      @picture = @current_user.pictures.new
-    end
   end
 
   # GET /pictures/1
@@ -17,6 +14,9 @@ class PicturesController < ApplicationController
   def show
   end
 
+  # GET /pictures/picker
+  def picker
+  end
   # GET /pictures/new
   def new
     @picture = @current_user.pictures.new
@@ -24,6 +24,7 @@ class PicturesController < ApplicationController
 
   # GET /pictures/1/edit
   def edit
+    render layout: "empty"
   end
 
   # POST /pictures
@@ -34,7 +35,7 @@ class PicturesController < ApplicationController
     respond_to do |format|
       if @picture.save
         format.html { redirect_to @picture, notice: 'Picture was successfully created.' }
-        format.json { render json: { message: "success", fileID: @picture.id }, :status => 200}
+        format.json { render json: { message: "success", file_id: @picture.id, action: "create"}, :status => 200}
       else
         format.html { render :new }
         format.json { render json: @picture.errors, status: :unprocessable_entity }
@@ -45,10 +46,11 @@ class PicturesController < ApplicationController
   # PATCH/PUT /pictures/1
   # PATCH/PUT /pictures/1.json
   def update
+    @picture.image.crop params[:picture][:image_crop_x].to_i, params[:picture][:image_crop_y].to_i, params[:picture][:image_crop_w].to_i, params[:picture][:image_crop_h].to_i
     respond_to do |format|
       if @picture.update(picture_params)
         format.html { redirect_to @picture, notice: 'Picture was successfully updated.' }
-        format.json { render :show, status: :ok, location: @picture }
+        format.json { render json: { message: "success", file_id: @picture.id, action: "update" } }
       else
         format.html { render :edit }
         format.json { render json: @picture.errors, status: :unprocessable_entity }
@@ -62,7 +64,7 @@ class PicturesController < ApplicationController
     @picture.destroy
     respond_to do |format|
       format.html { redirect_to pictures_url, notice: 'Picture was successfully destroyed.' }
-      format.json { head :no_content }
+      format.json { render json: { message: "success", action: "destroy" } }
     end
   end
 
@@ -77,10 +79,16 @@ class PicturesController < ApplicationController
     unless logged_in?
       redirect_to login_url
     end
+    begin
+      unless @picture.user == @current_user
+        redirect_to login_url
+      end
+    rescue
+    end
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def picture_params
-    params.require(:picture).permit(:crop_height, :crop_width, :name, :image)
+    params.require(:picture).permit(:image_crop_x, :image_crop_y, :image_crop_w, :image_crop_h, :name, :image)
   end
 end

@@ -46,6 +46,9 @@ class UsersController < ApplicationController
     if params[:user][:avatar_id] != nil
       @user.update_attributes avatar: Picture.find(params[:user][:avatar_id])
     end
+    if params[:user][:cover_picture_id] != nil
+      @user.update_attributes cover_picture: Picture.find(params[:user][:cover_picture_id])
+    end
     respond_to do |format|
       if @user.update(user_params)
         format.html { redirect_to settings_url, alert: 'User was successfully updated.' }
@@ -76,6 +79,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:username, :email, :encrypted_password, :password, :salt, :avatar, :id)
+      params.require(:user).permit(:username, :email, :encrypted_password, :password, :salt, :avatar, :cover_picture, :id)
     end
 end

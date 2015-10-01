@@ -16,10 +16,12 @@ sanitized_options = (opts) ->
   default_options = {
     hide_select:      true,
     show_label:       false,
+    card_blocks:      undefined,
     initialized:      undefined,
     changed:          undefined,
     clicked:          undefined,
     selected:         undefined,
+    deselected:       undefined,
     limit:            undefined,
     limit_reached:    undefined,
   }
@@ -53,14 +55,22 @@ class ImagePicker
     @sync_picker_with_select()
 
   sync_picker_with_select: () =>
+    option_nodes = []
     for option in @picker_options
       if option.is_selected()
         option.mark_as_selected()
       else
         option.unmark_as_selected()
+      option_nodes.push option.value()
+    @select.find('option').each (index, o)->
+      if option_nodes.indexOf($(o).attr("value").toInteger ) < -1
+        po = new ImagePickerOption( o, this, @opts )
+        @picker_options.push po
+        @picker.append po.node
+
 
   create_picker: () ->
-    @picker         =  jQuery("<ul class='thumbnails image_picker_selector'></ul>")
+    @picker         =  jQuery("<div class='ui four doubling cards image-picker-selector'></div>")
     @picker_options = []
     @recursively_parse_option_groups(@select, @picker)
     @picker
@@ -68,9 +78,9 @@ class ImagePicker
   recursively_parse_option_groups: (scoped_dom, target_container) ->
     for option_group in scoped_dom.children("optgroup")
       option_group = jQuery(option_group)
-      container    = jQuery("<ul></ul>")
-      container.append jQuery("<li class='group_title'>#{option_group.attr("label")}</li>")
-      target_container.append jQuery("<li>").append(container)
+      container    = jQuery("<div></div>")
+      container.append jQuery("<div class='group_title'>#{option_group.attr("label")}</div>")
+      target_container.append jQuery("<div>").append(container)
       @recursively_parse_option_groups(option_group, container)
     for option in (new ImagePickerOption(option, this, @opts) for option in scoped_dom.children("option"))
       @picker_options.push option
@@ -118,7 +128,7 @@ class ImagePickerOption
     @create_node()
 
   destroy: ->
-    @node.find(".thumbnail").unbind()
+    @node.unbind()
 
   has_image: () ->
     @option.data("img-src")?
@@ -134,10 +144,11 @@ class ImagePickerOption
       @value() == select_value
 
   mark_as_selected: () ->
-    @node.find(".thumbnail").addClass("selected")
+    @node.addClass("selected")
 
   unmark_as_selected: () ->
-    @node.find(".thumbnail").removeClass("selected")
+    @node.removeClass("selected")
+    @opts.deselected.call(@picker.select, this) if @opts.deselected?
 
   value: () ->
     @option.val()
@@ -154,13 +165,26 @@ class ImagePickerOption
     @opts.selected.call(@picker.select, this) if @opts.selected? and @is_selected()
 
   create_node: () ->
-    @node = jQuery("<li/>")
-    image = jQuery("<img class='image_picker_image'/>")
-    image.attr("src", @option.data("img-src"))
-    thumbnail = jQuery("<div class='thumbnail'>")
-    thumbnail.click {option: this}, (event) ->
+    @node = jQuery("
+    <div class='card image-picker-item'>
+      <div class='blurring dimmable image'>
+        <div class='ui dimmer'>
+          <div class='content'>
+            <div class='center'>
+              <a class='ui inverted basic button' onclick='window.openPictureSettings(" + @option.val() + ")'>Settings</a>
+            </div>
+          </div>
+        </div>
+        <img class='image_picker_image card-img-top' src='" + @option.data("img-src") + "' />
+      </div>
+      <div class='content'>
+        <div class='header'>" + ((@label()) if @opts.show_label) + "</div>
+        <div class='meta'>
+          <span class='date'>" + @option.data("date") + "</span>
+        </div>
+      </div>
+    </div>
+    ")
+    @node.click {option: this}, (event) ->
       event.data.option.clicked()
-    thumbnail.append(image)
-    thumbnail.append(jQuery("<p/>").html(@label())) if @opts.show_label
-    @node.append( thumbnail )
     @node

@@ -1,2 +1,3 @@
-h1
-  | Welcome #{@current_user.username}
+- if logged_in?
+  - @user = @current_user
+  == render 'users/profile'

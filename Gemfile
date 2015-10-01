@@ -5,13 +5,13 @@ gem 'rails', '4.1.8'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.3'
+gem 'sass-rails'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails', '~> 4.0.0'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-gem 'therubyracer', platforms: :ruby
+#gem 'therubyracer'
 gem 'execjs', platforms: :ruby
 
 # Use jquery as the JavaScript library
@@ -43,8 +43,15 @@ gem 'coffee-script-source', '1.8.0'
 gem 'mini_magick'
 gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
 
-gem 'bootstrap-sass', '~> 3.2.0'
+# gem 'bootstrap', git: 'https://github.com/twbs/bootstrap-rubygem'
 gem 'autoprefixer-rails'
-gem 'bootstrap_form'
+# gem 'bootstrap_form'
 
 gem 'slim'
+#
+# source 'https://rails-assets.org' do
+#   gem 'rails-assets-tether', '>= 1.1.0'
+# end
+# gem 'bourbon'
+
+gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass'

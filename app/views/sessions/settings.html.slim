@@ -1,10 +1,10 @@
 - @user = @current_user
 h1 User Settings
-== bootstrap_form_for @user, html: { multipart: true } do |f|
+== form_for @user, html: { multipart: true } do |f|
 
   == image_tag @user.avatar.image_url(:square_500) if ! @user.avatar.nil?
-  button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#picture-selector"
+  .ui.basic.button data-image-picker="window.setUserAvatar" data-picker-multiple=false
     | Change Avatar
-
-
-== render "pictures/chooser", locals: { object: @user, method: "put", multiple: false, name: "avatar_id"}
+  .ui.basic.button data-image-picker="window.setUserCover" data-picker-multiple=false
+    | Change Cover Picture
+      

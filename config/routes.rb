@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
 
-  resources :pictures
+  get "pictures/picker", to: "pictures#picker"
 
+  resources :pictures
   resources :posts
 
   resources :artworks

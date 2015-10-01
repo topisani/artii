@@ -14,12 +14,23 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   storage :file
   after :remove, :delete_empty_upstream_dirs
+  process convert: 'jpg'
   def store_dir
     "uploads/users/#{model.user.id.to_s.underscore}/#{model.class.to_s.underscore}/#{model.id}"
   end
 
   def default_url
     '/images/fallback/' + [mounted_as, version_name, 'default.png'].compact.join('_')
+  end
+
+  def crop(x,y,w,h)
+    convert = MiniMagick::Tool::Convert.new do |convert|
+      convert << current_path
+      convert.crop "#{w}x#{h}+#{x}+#{y}"
+      convert.repage.+
+      convert << current_path
+    end
+    recreate_versions!
   end
 
   version :square do
@@ -59,13 +70,13 @@ class ImageUploader < CarrierWave::Uploader::Base
   end
 
   def filename
-    original_filename
+    'img.jpg'
   end
 
-def delete_empty_upstream_dirs
-  path = ::File.expand_path(store_dir, root)
-  Dir.delete(path) # fails if path not empty dir
-rescue SystemCallError
-  true # nothing, the dir is not empty
-end
+  def delete_empty_upstream_dirs
+    path = ::File.expand_path(store_dir, root)
+    Dir.delete(path) # fails if path not empty dir
+    rescue SystemCallError
+      true # nothing, the dir is not empty
+  end
 end

@@ -1,0 +1,9 @@
+- add_class = defined?(locals) ?  locals[:class] : ""
+== form_tag({action: "login_attempt", controller: "sessions",format: "json" }, { method: :post, remote: true, class: "ui form loginform " + add_class})
+  .field
+    label Username / Email
+    input type="text" name="username_or_email" placeholder="Username"
+  .field
+    label Password
+    input type="password" name="login_password" placeholder="Password"
+  button.ui.positive.button type="submit" Login

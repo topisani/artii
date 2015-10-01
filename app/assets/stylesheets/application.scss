@@ -1,0 +1,73 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ */
+
+@import "dropzone";
+@import "cropper";
+@import "animate.css-scss/animate.scss";
+
+.hidden {
+  display: none;
+  visibility: hidden;
+}
+// #############################
+// # Semantic UI Enhancements
+// #############################
+.image[data-src] {
+  height: 100% !important;
+  width: 100% !important;
+  background-position: center bottom;
+  background-size: cover;
+}
+
+// #############################
+// # Profile view
+// #############################
+.coverimage {
+  height: 300px;
+  width: 100%;
+  padding: 0px !important;
+  overflow: hidden;
+  div.image {
+    overflow: hidden;
+  }
+}
+.profilepicture {
+  position: absolute !important;
+  bottom: 0px;
+  left: 0px;
+  height: 170px !important;
+  width: 170px !important;
+  border: 1px solid #D4D4D5;
+  border-radius: 0px 3px 0px 0px!important;
+  .image.content {
+    padding: 4px;
+  }
+}
+// #############################
+// # Image picker
+// #############################
+.image-picker-selector {
+  .card {
+    @include zoomIn;
+    &.out{
+      visibility: hidden;
+    }
+    img {
+      width: 100%;
+    }
+    &.selected {
+      box-shadow: 0px 0px 0px 1px #006FDB, 0px 2px 27px -3px #2185D0, 0px 1px 3px 0px #0089EF;
+    }
+  }
+}

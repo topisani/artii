@@ -1,5 +1,55 @@
-== bootstrap_form_for(@picture ) do |f|
+#picture-form-alert
+javascript:
+  window.pictureSettingsPicture = "#{@picture.image.url()}"
+coffee:
+  window.submitPictureForm = ->
+    form = $("#edit-picture-form")
+    response = $.ajax(
+      type: form.attr("method")
+      url: form.attr("action")
+      data: form.serialize()
+      success: window.pictureUpdateSuccess
+    )
+  window.deletePicture = ( id )->
+    response = $.ajax(
+      type: "DELETE"
+      url: "/pictures/" + id + ".json"
+      data: "?_method=destroy&utf8=✓&authenticity-token=" + window._token
+      success: window.pictureUpdateSuccess
+    )
+  class CarrierWaveCropper
+    constructor: ->
+      $('#picture_image_cropbox').cropper
+        responsive: false
+        autoCropArea: 1
+        movable: false
+        rotatable: false
+        scaleable: false
+        zoomable: false
+        mouseWheelZoom: false
+        background: false
+        crop: @update
+
+    update: (coords) =>
+      $('#picture_image_crop_x').val(coords.x)
+      $('#picture_image_crop_y').val(coords.y)
+      $('#picture_image_crop_w').val(coords.width)
+      $('#picture_image_crop_h').val(coords.height)
+   new CarrierWaveCropper()
+
+button type="button" class="close" aria-label="Close" onclick="window.pictureSettings.close()" : span aria-hidden="true" &times;
+== form_for( @picture, format: :json, html: {target: "saveImage#{@picture.id}", id: "edit-picture-form"}) do |f|
   == f.alert_message "Please fix the following #{'error'.pluralize(@picture.errors.count)} "
-  == f.dropzone_field :image
+  == f.hidden_field "image_crop_x", id: "picture_image_crop_x"
+  == f.hidden_field "image_crop_y", id: "picture_image_crop_y"
+  == f.hidden_field "image_crop_w", id: "picture_image_crop_w"
+  == f.hidden_field "image_crop_h", id: "picture_image_crop_h"
   == f.text_field :name
-  == f.primary "Save Image"
+  .bnt-group
+    == link_to 'Delete', "#", class: "btn btn-danger", onclick: "window.deletePicture(#{@picture.id})"
+    == f.primary "Save Image", onclick: "window.submitPictureForm()", type: "button"
+    button type="button" class="btn" data-toggle="modal" data-target="#picture-crop"
+      | Crop picture
+
+iframe.hidden.image-settings-response name="saveImage#{@picture.id}"
+  
