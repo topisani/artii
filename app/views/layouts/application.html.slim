@@ -14,7 +14,7 @@ html
       });
   body
     .ui.top.attached.menu
-      == link_to "Home", root_path, class:"item"
+      == link_to "ARTII", root_path, class:"item"
       - if logged_in?
         .ui.right.no.action.dropdown.item
           .text
@@ -27,7 +27,7 @@ html
       - else
         .ui.right.floated.item
           a.ui.link href="#" data-open-modal="loginmodal" Log in
-    .ui.container.grid
+    .ui.container
       .row
         == insert_flash
       .row.page-contents
