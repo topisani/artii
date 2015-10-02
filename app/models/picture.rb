@@ -1,7 +1,8 @@
 class Picture < ActiveRecord::Base
   belongs_to :user
-  belongs_to :post
-  belongs_to :artwork
+  has_many :artworks, through: :artwork_pictures
+  has_many :posts, through: :post_pictures
+
 
   mount_uploader :image, ImageUploader
 
