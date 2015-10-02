@@ -1,5 +1,5 @@
 class PicturesController < ApplicationController
-  before_action :set_picture, only: [:show, :edit, :update, :destroy]
+  before_action :set_picture, only: [ :edit, :update, :destroy]
   before_action :authenticate_user
   before_action :check_user, only: [:edit, :update, :destroy, :create, :new]
 
@@ -9,9 +9,12 @@ class PicturesController < ApplicationController
     @pictures = (params[:username] != nil) ? User.find_by_username(params[:username]).pictures : Picture.all
   end
 
-  # GET /pictures/1
-  # GET /pictures/1.json
+  # GET /pictures/1.jpg
   def show
+    iv = params[:id].split("_")
+    id = iv[0]
+    version = iv[1]
+    send_file 'public/' + Picture.find(id).image.url(version), type: 'image/jpeg'
   end
 
   # GET /pictures/picker
