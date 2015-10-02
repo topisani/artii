@@ -17,6 +17,7 @@
 #= require semantic-ui
 #= require dropzone
 #= require image-picker
+#= require slick-carousel/slick/slick.min
 
 ready = ->
 
