@@ -16,6 +16,7 @@ sanitized_options = (opts) ->
   default_options = {
     hide_select:      true,
     show_label:       false,
+    multiple:         false,
     card_blocks:      undefined,
     initialized:      undefined,
     changed:          undefined,
@@ -33,8 +34,10 @@ both_array_are_equal = (a,b) ->
 class ImagePicker
   constructor: (select_element, @opts={}) ->
     @select         = jQuery(select_element)
-    @multiple       = @select.attr("multiple") == "multiple"
+    @multiple       = @opts.multiple
     @opts.limit     = parseInt(@select.data("limit")) if @select.data("limit")?
+    if @multiple
+      @select.attr("multiple", true)
     @build_and_append_picker()
 
   destroy: ->
@@ -111,6 +114,7 @@ class ImagePicker
           if @opts.limit_reached?
             @opts.limit_reached.call(@select)
         else
+          console.log @select.val()
           @select.val @selected_values().concat selected_value
     else
       if @has_implicit_blanks() && imagepicker_option.is_selected()
