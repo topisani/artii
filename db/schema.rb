@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151001064517) do
+ActiveRecord::Schema.define(version: 20151003170846) do
+
+  create_table "artwork_pictures", force: true do |t|
+    t.integer  "artwork_id"
+    t.integer  "picture_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "artworks", force: true do |t|
     t.string   "name"
@@ -20,6 +27,7 @@ ActiveRecord::Schema.define(version: 20151001064517) do
     t.boolean  "published"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   create_table "pictures", force: true do |t|
@@ -28,8 +36,13 @@ ActiveRecord::Schema.define(version: 20151001064517) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+  end
+
+  create_table "post_pictures", force: true do |t|
     t.integer  "post_id"
-    t.integer  "artwork_id"
+    t.integer  "picture_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "posts", force: true do |t|
@@ -38,6 +51,7 @@ ActiveRecord::Schema.define(version: 20151001064517) do
     t.boolean  "published"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   create_table "users", force: true do |t|
