@@ -23,13 +23,16 @@
   display: none;
   visibility: hidden;
 }
+img {
+  max-width: 100%
+}
 // #############################
 // # Semantic UI Enhancements
 // #############################
 .image[data-src] {
   height: 100% !important;
   width: 100% !important;
-  background-position: center bottom;
+  background-position: center center;
   background-size: cover;
 }
 
@@ -70,5 +73,14 @@
     &.selected {
       box-shadow: 0px 0px 0px 1px #006FDB, 0px 2px 27px -3px #2185D0, 0px 1px 3px 0px #0089EF;
     }
+  }
+}
+// ############################
+// # Slick
+// ############################
+.slick-list {
+  height: 100%;
+  .slick-track {
+    height: 100%;
   }
 }

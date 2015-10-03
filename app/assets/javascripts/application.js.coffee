@@ -43,10 +43,35 @@ ready = ->
   $('.card .dimmable').dimmer
     on: 'hover'
 
+#################################
+# HTML5 Data attributes
+#################################
 ## Open modal with unobtrusive javascript
   $('[data-open-modal]').click ->
     $("#" + $(this).data("open-modal")).modal("show")
 
+## Create slick carousel with pictures
+  $('.slick[data-slick]').each ->
+    pictures = $(this).data('slick').split(',')
+    version = if $(this).data('img-version') then "_" + $(this).data('img-version') else ""
+    for picture in pictures
+      $(this).append "
+        <div class='slick-item'>
+          <div class='image' data-src='/pictures/" + picture + version + ".jpg'/>
+        </div>
+        "
+    $(this).slick(
+      dots: true
+      infinite: true
+      speed: 800
+      slidesToShow: 1
+      slidesToScroll: 1
+      autoplay: true
+      autoplaySpeed: 2000
+      fade: true
+      cssEase: 'linear'
+      pauseOnHover: false
+    )
 ## Hide image overflow
   $('.image[data-src]').each ->
     $(this).css("background-image", "url('" + $(this).data("src") + "')")
