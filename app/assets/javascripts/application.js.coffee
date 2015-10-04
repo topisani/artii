@@ -57,20 +57,22 @@ ready = ->
     for picture in pictures
       $(this).append "
         <div class='slick-item'>
-          <div class='image' data-src='/pictures/" + picture + version + ".jpg'/>
+          <img class='ui image' src='/pictures/" + picture + version + ".jpg'/>
         </div>
         "
     $(this).slick(
       dots: true
       infinite: true
-      speed: 800
+      speed: 2000
       slidesToShow: 1
+      centerMode: true
       slidesToScroll: 1
       autoplay: true
       autoplaySpeed: 2000
-      fade: true
-      cssEase: 'linear'
+      fade: false
+      cssEase: 'ease'
       pauseOnHover: false
+      variableWidth: true
     )
 ## Hide image overflow
   $('.image[data-src]').each ->

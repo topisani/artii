@@ -13,7 +13,7 @@ html
         window._user_id = #{@current_user.id if logged_in?};
       });
   body
-    .ui.top.attached.menu
+    .ui.top.fixed.menu
       == link_to "ARTII", root_path, class:"item"
       - if logged_in?
         .ui.right.no.action.dropdown.item
