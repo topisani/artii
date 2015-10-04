@@ -55,3 +55,6 @@ gem 'slim'
 gem 'bourbon'
 
 gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass'
+
+gem 'react-rails', github: 'reactjs/react-rails', branch: 'master'
+gem 'showdown-rails'
