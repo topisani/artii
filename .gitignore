@@ -33,3 +33,4 @@ config/secrets.yml
 .powenv
 *.swp
 /public
+/.imdone

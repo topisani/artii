@@ -18,6 +18,10 @@
 #= require dropzone
 #= require image-picker
 #= require slick-carousel/slick/slick.min
+#= require showdown
+#= require react
+#= require react_ujs
+#= require components
 
 ready = ->
 
@@ -51,29 +55,21 @@ ready = ->
     $("#" + $(this).data("open-modal")).modal("show")
 
 ## Create slick carousel with pictures
-  $('.slick[data-slick]').each ->
-    pictures = $(this).data('slick').split(',')
-    version = if $(this).data('img-version') then "_" + $(this).data('img-version') else ""
-    for picture in pictures
-      $(this).append "
-        <div class='slick-item'>
-          <img class='ui image' src='/pictures/" + picture + version + ".jpg'/>
-        </div>
-        "
-    $(this).slick(
-      dots: true
-      infinite: true
-      speed: 2000
-      slidesToShow: 1
-      centerMode: true
-      slidesToScroll: 1
-      autoplay: true
-      autoplaySpeed: 2000
-      fade: false
-      cssEase: 'ease'
-      pauseOnHover: false
-      variableWidth: true
-    )
+  # $('.slick[data-slick]').each ->
+  #   $(this).slick(
+  #     dots: true
+  #     infinite: true
+  #     speed: 2000
+  #     slidesToShow: 1
+  #     centerMode: true
+  #     slidesToScroll: 1
+  #     autoplay: true
+  #     autoplaySpeed: 2000
+  #     fade: false
+  #     cssEase: 'ease'
+  #     pauseOnHover: false
+  #     variableWidth: true
+  #   )
 ## Hide image overflow
   $('.image[data-src]').each ->
     $(this).css("background-image", "url('" + $(this).data("src") + "')")

@@ -10,6 +10,7 @@ class ArtworksController < ApplicationController
   # GET /artworks/1
   # GET /artworks/1.json
   def show
+    render component: 'Artwork', props: @artwork, tag: 'div'
   end
 
   # GET /artworks/new
