@@ -53,23 +53,6 @@ ready = ->
 ## Open modal with unobtrusive javascript
   $('[data-open-modal]').click ->
     $("#" + $(this).data("open-modal")).modal("show")
-
-## Create slick carousel with pictures
-  # $('.slick[data-slick]').each ->
-  #   $(this).slick(
-  #     dots: true
-  #     infinite: true
-  #     speed: 2000
-  #     slidesToShow: 1
-  #     centerMode: true
-  #     slidesToScroll: 1
-  #     autoplay: true
-  #     autoplaySpeed: 2000
-  #     fade: false
-  #     cssEase: 'ease'
-  #     pauseOnHover: false
-  #     variableWidth: true
-  #   )
 ## Hide image overflow
   $('.image[data-src]').each ->
     $(this).css("background-image", "url('" + $(this).data("src") + "')")
@@ -89,7 +72,7 @@ ready = ->
     $(this).find("button:submit").addClass("success");
     location.reload();
   )
-
+  
 #################################
 # Image Picker
 #################################

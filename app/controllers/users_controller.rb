@@ -11,6 +11,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    render component: 'Profile', props: @user, tag: 'div' 
   end
 
   # GET /users/new
