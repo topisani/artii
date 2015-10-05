@@ -24,6 +24,7 @@
     "animate.css-scss": "https://github.com/geoffgraham/animate.scss.git#latest",
     "cropper": "~0.11.1",
     "slick-carousel": "~1.5.8",
-    "medium-editor": "~5.8.2"
+    "medium-editor": "~5.8.2",
+    "vue": "~1.0"
   }
 }
