@@ -1,4 +1,4 @@
-== bootstrap_form_for(@user, html: { multipart: true }, inline_errors: false) do |f|
+== form_for(@user, html: { multipart: true }, inline_errors: false) do |f|
   == f.alert_message "Please fix the following #{'error'.pluralize(@user.errors.count)} "
   == f.text_field :email, class: "form-control", prepend: "@"
   == f.text_field :username, class: "form-control"
