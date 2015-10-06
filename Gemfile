@@ -1,9 +1,5 @@
 source 'https://rubygems.org'
-
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.8'
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+gem 'rails', '4.2.4'
 # Use SCSS for stylesheets
 gem 'sass-rails'
 # Use Uglifier as compressor for JavaScript assets
@@ -11,7 +7,7 @@ gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails', '~> 4.0.0'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-#gem 'therubyracer'
+gem 'therubyracer', platforms: :ruby
 gem 'execjs', platforms: :ruby
 
 # Use jquery as the JavaScript library
@@ -26,15 +22,6 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
-# Use unicorn as the app server
-# gem 'unicorn'
-
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
-
-# Use debugger
-gem 'byebug', group: [:development, :test]
-
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin]
 
@@ -43,15 +30,19 @@ gem 'coffee-script-source', '1.8.0'
 gem 'mini_magick'
 gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
 
-# gem 'bootstrap', git: 'https://github.com/twbs/bootstrap-rubygem'
 gem 'autoprefixer-rails'
-# gem 'bootstrap_form'
 
 gem 'slim'
-#
-# source 'https://rails-assets.org' do
-#   gem 'rails-assets-tether', '>= 1.1.0'
-# end
 gem 'bourbon'
 
-gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass'
+group :development, :test do
+  # Use debugger
+  gem 'byebug'
+
+  gem 'sqlite3'
+
+end
+group :production do
+  gem 'pg'
+  gem 'rails_12factor'
+end
