@@ -1,14 +1,32 @@
-.ui.top.attached.segment.coverimage
-  .ui.fluid.top.image data-src=@user.cover_picture.image.url
-.ui.bottom.attached.menu
-  .item
-    img.ui.rounded.image.profilepicture src=@user.avatar.image.url(:square_250)
-  .item
-    h4 == @user.username
-.ui.grid
-  .ui.five.wide.column
-    .ui.fluid.segment
-      h1 Artworks
-  .ui.eleven.wide.column
-    .ui.fluid.segment
-      | Main
+#profile-view
+  .ui.top.attached.segment.coverimage
+    .ui.fluid.top.image data-src=@user.cover_picture.image.url
+  .ui.bottom.attached.menu
+    .item
+      img.ui.rounded.image.profilepicture src=""
+    .item
+      h4 
+        | {{ user.username }}
+  .ui.grid
+    .ui.five.wide.column
+      .ui.fluid.segment
+        h1 Artworks
+    .ui.eleven.wide.column
+      .ui.fluid.segment
+        | Main
+javascript:
+  var userModel = {
+    user: {
+      username: "#{@user.username}",
+    }
+  };
+  var profileVM = new Vue({
+    el: "#profile-view",
+    data: userModel,
+    ready: function(){
+      this.$http.get("/" + this.$data.user.username + ".json", 
+        function( user ) {
+          this.$set('user', user);
+        });
+    }
+  });

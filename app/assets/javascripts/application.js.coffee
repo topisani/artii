@@ -18,6 +18,8 @@
 #= require dropzone
 #= require image-picker
 #= require slick-carousel/slick/slick.min
+#= require vue/dist/vue
+#= require vue-resource/dist/vue-resource
 
 ready = ->
 
