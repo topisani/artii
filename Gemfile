@@ -35,6 +35,8 @@ gem 'autoprefixer-rails'
 gem 'slim'
 gem 'bourbon'
 
+gem 'rabl'
+
 group :development, :test do
   # Use debugger
   gem 'byebug'
