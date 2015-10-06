@@ -14,7 +14,7 @@
 #= require jquery
 #= require jquery_ujs
 #= require turbolinks
-#= require semantic-ui.min
+#= require semantic.min
 #= require dropzone
 #= require image-picker
 #= require slick-carousel/slick/slick.min
