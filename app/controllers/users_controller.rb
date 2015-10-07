@@ -23,40 +23,19 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      flash[:notice] = "You signed up successfully"
-      flash[:color]= "valid"
+      render json: @user, status: 201, location: @user
     else
-      flash[:notice] = "Form is invalid"
-      flash[:color]= "invalid"
-    end
-    respond_to do |format|
-      if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
-        format.json { render :show, status: :created, location: @user }
-      else
-        format.html { render :new }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
+      render json: { errors: @user.errors }, status: 422
     end
   end
 
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
-    if params[:user][:avatar_id] != nil
-      @user.update_attributes avatar: Picture.find(params[:user][:avatar_id])
-    end
-    if params[:user][:cover_picture_id] != nil
-      @user.update_attributes cover_picture: Picture.find(params[:user][:cover_picture_id])
-    end
-    respond_to do |format|
-      if @user.update(user_params)
-        format.html { redirect_to settings_url, alert: 'User was successfully updated.' }
-        format.json { render :show, status: :ok, location: @user }
-      else
-        format.html { render :edit }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
+    if @user.update(user_params)
+      render json: @user, status: 200, location: @user
+    else
+      render json: { errors: @user.errors }, status: 442
     end
   end
 
@@ -64,10 +43,7 @@ class UsersController < ApplicationController
   # DELETE /users/1.json
   def destroy
     @user.destroy
-    respond_to do |format|
-      format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    head 204
   end
 
   private
