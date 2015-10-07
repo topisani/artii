@@ -1,9 +1,0 @@
-== form_for(@user, html: { multipart: true }, inline_errors: false) do |f|
-  - if @user.errors
-    | Please fix the following #{'error'.pluralize(@user.errors.count)} 
-  == f.text_field :email, class: "form-control", prepend: "@"
-  == f.text_field :username, class: "form-control"
-  == f.password_field :password, class: "form-control"
-  == f.password_field :password_confirmation, class: "form-control"
-  
-  == f.submit "Save Changes"
