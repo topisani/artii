@@ -8,14 +8,12 @@ class User < ActiveRecord::Base
   before_save :encrypt_password
   after_save :clear_password
 
-  attr_accessor :password, :picture_id, :avatar_id
-  private :password, :password=
+  attr_accessor :password
   EMAIL_REGEX = /\A[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\z/i
   validates :username, :presence => true, :uniqueness => true, :length => { :in => 3..20 }
   validates :email, :presence => true, :uniqueness => true, :format => EMAIL_REGEX
   validates :password, :confirmation => true #password_confirmation attr
-  validates_length_of :password, :in => 1..20, :on => :create
-
+  validates_length_of :password, :in => 1..40, :on => [:create, :update]
 
   def self.authenticate(username_or_email = "", login_password = "")
     if  EMAIL_REGEX.match(username_or_email)

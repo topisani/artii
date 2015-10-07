@@ -6,16 +6,19 @@ class UsersController < ApplicationController
   # GET /users.json
   def index
     @users = User.all
+    render json: @users
   end
 
   # GET /users/1
   # GET /users/1.json
   def show
+    render json: @user
   end
 
   # GET /users/new
   def new
     @user = User.new
+    render json: @user
   end
 
   # POST /users
@@ -50,11 +53,11 @@ class UsersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find_by_username(params[:username])
-      @user = User.find(params[:id]) if @user == nil
+      @user ||= User.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:username, :email, :password, :avatar, :cover_picture, :id)
+      params.require(:user).permit(:username, :email, :password, :password_confirmation, :avatar, :cover_picture, :id)
     end
 end

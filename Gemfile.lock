@@ -8,6 +8,15 @@ GIT
       json (>= 1.7)
       mime-types (>= 1.16)
 
+GIT
+  remote: git://github.com/rails-api/active_model_serializers.git
+  revision: d5e6e3148a70fcc0fc201e58ebb9d5f897fdf2ad
+  specs:
+    active_model_serializers (0.10.0.rc3)
+      actionpack (>= 4.0)
+      activemodel (>= 4.0)
+      railties (>= 4.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -50,35 +59,9 @@ GEM
     bcrypt (3.1.10-x86-mingw32)
     builder (3.2.2)
     byebug (6.0.2)
-    chunky_png (1.3.4)
-    compass (1.0.3)
-      chunky_png (~> 1.2)
-      compass-core (~> 1.0.2)
-      compass-import-once (~> 1.0.5)
-      rb-fsevent (>= 0.9.3)
-      rb-inotify (>= 0.9)
-      sass (>= 3.3.13, < 3.5)
-    compass-core (1.0.3)
-      multi_json (~> 1.0)
-      sass (>= 3.3.0, < 3.5)
-    compass-import-once (1.0.5)
-      sass (>= 3.2, < 3.5)
-    compass-rails (2.0.1)
-      compass (~> 1.0.0)
     erubis (2.7.0)
-    ffi (1.9.10-x86-mingw32)
-    font-awesome-rails (4.4.0.0)
-      railties (>= 3.2, < 5.0)
-    furatto (1.4.0)
-      actionpack (>= 3.1)
-      activemodel (>= 3.1)
-      compass-rails (~> 2.0)
-      railties (>= 3.1.0)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
-    httparty (0.13.7)
-      json (~> 1.8)
-      multi_xml (>= 0.5.2)
     i18n (0.7.0)
     informant-rails (0.8.0)
       rails (>= 3.0.0, < 4.3.0)
@@ -95,7 +78,6 @@ GEM
     mini_portile (0.6.2)
     minitest (5.8.1)
     multi_json (1.11.2)
-    multi_xml (0.5.5)
     nokogiri (1.6.6.2-x86-mingw32)
       mini_portile (~> 0.6.0)
     pg (0.18.3-x86-mingw32)
@@ -132,22 +114,11 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (10.4.2)
-    rb-fsevent (0.9.6)
-    rb-inotify (0.9.5)
-      ffi (>= 0.5.0)
     rdoc (4.2.0)
       json (~> 1.4)
-    sabisu_rails (0.0.2.pre.beta)
-      actionpack (~> 4.0)
-      activemodel (~> 4.0)
-      httparty (~> 0.13)
-    sass (3.4.18)
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
-    simple_form (3.2.0)
-      actionpack (~> 4.0)
-      activemodel (~> 4.0)
     sprockets (3.4.0)
       rack (> 1, < 3)
     sprockets-rails (2.3.3)
@@ -166,20 +137,16 @@ PLATFORMS
   x86-mingw32
 
 DEPENDENCIES
+  active_model_serializers!
   bcrypt (~> 3.1.7)
   byebug
   carrierwave!
-  compass-rails
-  font-awesome-rails
-  furatto
   informant-rails
   jbuilder (~> 2.0)
   mini_magick
   pg
   rails (= 4.2.4)
   rails_12factor
-  sabisu_rails
   sdoc (~> 0.4.0)
-  simple_form
   sqlite3
   tzinfo-data

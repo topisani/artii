@@ -13,18 +13,12 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin]
 gem 'mini_magick'
 gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
 
+gem 'active_model_serializers', github: 'rails-api/active_model_serializers'
 group :development, :test do
   # Use debugger
   gem 'byebug'
 
   gem 'sqlite3'
-
-  gem 'sabisu_rails'
-  gem 'compass-rails'
-  gem 'furatto'
-  gem 'font-awesome-rails'
-  gem 'simple_form'
-
 end
 group :production do
   gem 'pg'
