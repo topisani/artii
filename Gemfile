@@ -19,6 +19,12 @@ group :development, :test do
 
   gem 'sqlite3'
 
+  gem 'sabisu_rails'
+  gem 'compass-rails'
+  gem 'furatto'
+  gem 'font-awesome-rails'
+  gem 'simple_form'
+
 end
 group :production do
   gem 'pg'
