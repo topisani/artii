@@ -11,13 +11,7 @@ module API
         formatter :json, Grape::Formatter::ActiveModelSerializers
 
         helpers do
-          def permitted_params
-            @permitted_params ||= declared(params, include_missing: false)
-          end
-
-          def logger
-            Rails.logger
-          end
+          include API::V1::Helpers
         end
 
         rescue_from ActiveRecord::RecordNotFound do |e|
