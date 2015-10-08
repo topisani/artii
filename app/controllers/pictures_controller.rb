@@ -3,31 +3,22 @@ class PicturesController < ApplicationController
   before_action :authenticate_user
   before_action :check_user, only: [:edit, :update, :destroy, :create, :new]
 
-  # GET /pictures
-  # GET /pictures.json
   def index
     @pictures = (params[:username] != nil) ? User.find_by_username(params[:username]).pictures : Picture.all
+    render json: @pictures
   end
 
   # GET /pictures/1.jpg
   def show
-    iv = params[:id].split("_")
-    id = iv[0]
-    version = iv[1]
-    send_file 'public/' + Picture.find(id).image.url(version), type: 'image/jpeg'
-  end
-
-  # GET /pictures/picker
-  def picker
-  end
-  # GET /pictures/new
-  def new
-    @picture = @current_user.pictures.new
-  end
-
-  # GET /pictures/1/edit
-  def edit
-    render layout: "empty"
+    respond_to do |format|
+      format.json { render json: @picture }
+      format.jpg {
+        iv = params[:id].split("_")
+        id = iv[0]
+        version = iv[1]
+        send_file 'public/' + Picture.find(id).image.url(version), type: 'image/jpeg'
+      }
+    end
   end
 
   # POST /pictures

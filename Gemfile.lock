@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: git://github.com/rails-api/active_model_serializers.git
-  revision: d5e6e3148a70fcc0fc201e58ebb9d5f897fdf2ad
+  revision: 49eb53153909a77352e829ef81f2fff1746771e4
   specs:
     active_model_serializers (0.10.0.rc3)
       actionpack (>= 4.0)
@@ -56,18 +56,48 @@ GEM
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
     arel (6.0.3)
+    axiom-types (0.1.1)
+      descendants_tracker (~> 0.0.4)
+      ice_nine (~> 0.11.0)
+      thread_safe (~> 0.3, >= 0.3.1)
     bcrypt (3.1.10-x86-mingw32)
     builder (3.2.2)
     byebug (6.0.2)
+    coercible (1.0.0)
+      descendants_tracker (~> 0.0.1)
+    descendants_tracker (0.0.4)
+      thread_safe (~> 0.3, >= 0.3.1)
+    equalizer (0.0.11)
     erubis (2.7.0)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
+    grape (0.13.0)
+      activesupport
+      builder
+      hashie (>= 2.1.0)
+      multi_json (>= 1.3.2)
+      multi_xml (>= 0.5.2)
+      rack (>= 1.3.0)
+      rack-accept
+      rack-mount
+      virtus (>= 1.0.0)
+    grape-active_model_serializers (1.3.2)
+      active_model_serializers (>= 0.9.0)
+      grape
+    grape-entity (0.4.8)
+      activesupport
+      multi_json (>= 1.3.2)
+    grape-swagger (0.10.2)
+      grape (>= 0.8.0)
+      grape-entity
+    grape-swagger-rails (0.1.0)
+      grape-swagger (>= 0.7.2)
+      railties (>= 3.2.12)
+    hashie (3.4.2)
     i18n (0.7.0)
+    ice_nine (0.11.1)
     informant-rails (0.8.0)
       rails (>= 3.0.0, < 4.3.0)
-    jbuilder (2.3.2)
-      activesupport (>= 3.0.0, < 5)
-      multi_json (~> 1.2)
     json (1.8.3)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
@@ -78,10 +108,16 @@ GEM
     mini_portile (0.6.2)
     minitest (5.8.1)
     multi_json (1.11.2)
+    multi_xml (0.5.5)
     nokogiri (1.6.6.2-x86-mingw32)
       mini_portile (~> 0.6.0)
     pg (0.18.3-x86-mingw32)
     rack (1.6.4)
+    rack-accept (0.4.5)
+      rack (>= 0.4)
+    rack-cors (0.4.0)
+    rack-mount (0.8.3)
+      rack (>= 1.0.0)
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (4.2.4)
@@ -95,6 +131,9 @@ GEM
       bundler (>= 1.3.0, < 2.0)
       railties (= 4.2.4)
       sprockets-rails
+    rails-api (0.4.0)
+      actionpack (>= 3.2.11)
+      railties (>= 3.2.11)
     rails-deprecated_sanitizer (1.0.3)
       activesupport (>= 4.2.0.alpha)
     rails-dom-testing (1.0.7)
@@ -132,6 +171,11 @@ GEM
       thread_safe (~> 0.1)
     tzinfo-data (1.2015.7)
       tzinfo (>= 1.0.0)
+    virtus (1.0.5)
+      axiom-types (~> 0.1)
+      coercible (~> 1.0)
+      descendants_tracker (~> 0.0, >= 0.0.3)
+      equalizer (~> 0.0, >= 0.0.9)
 
 PLATFORMS
   x86-mingw32
@@ -141,11 +185,15 @@ DEPENDENCIES
   bcrypt (~> 3.1.7)
   byebug
   carrierwave!
+  grape
+  grape-active_model_serializers
+  grape-swagger-rails
   informant-rails
-  jbuilder (~> 2.0)
   mini_magick
   pg
+  rack-cors
   rails (= 4.2.4)
+  rails-api
   rails_12factor
   sdoc (~> 0.4.0)
   sqlite3
