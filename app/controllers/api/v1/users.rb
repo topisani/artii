@@ -11,7 +11,7 @@ module API
 
         desc "Return a user"
         params do
-          requires :username, type: String, desc: "Username of the contact"
+          requires :username, type: String, desc: "Username of the user"
         end
         get ":username", root: "user" do
           User.where(username: permitted_params[:username]).first!
