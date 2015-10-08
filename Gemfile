@@ -19,7 +19,7 @@ group :development, :test do
   gem 'sqlite3'
 end
 
-gem 'active_model_serializers', github: 'rails-api/active_model_serializers'
+gem 'active_model_serializers'
 gem "grape"
 gem "grape-active_model_serializers"
 gem "grape-swagger-rails"

@@ -1,29 +1,7 @@
 Artii::Application.routes.draw do
-  # Api definition
-  namespace :api, defaults: { format: :json } do
-    scope module: :v1, constraints: ApiConstraints.new(version: 1, default: true) do
-      get "pictures/picker", to: "pictures#picker"
 
-      resources :pictures
-      resources :posts
-
-      resources :artworks
-
-      root :to => "sessions#home"
-      get "signup", :to => "users#new"
-      get "login", :to => "sessions#login"
-      get "logout", :to => "sessions#logout"
-      get "home", :to => "sessions#home"
-      get "profile", :to => "sessions#profile"
-      get "settings", to: "sessions#settings"
-      post "login_attempt", :to => "sessions#login_attempt"
-      resources :users
-      resources :galleries
-
-      get ":username/pictures", to: "pictures#index"
-      get ":username", to: "users#show"
-    end
-  end
+  mount API::Base, at: "/"
+  mount GrapeSwaggerRails::Engine, at: "/docs"
 
 
   # The priority is based upon order of creation: first created -> highest priority.
