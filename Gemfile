@@ -19,11 +19,15 @@ group :development, :test do
   gem 'sqlite3'
 end
 
+#########################
+# Grape stuff
+#########################
 gem 'active_model_serializers'
 gem "grape"
 gem "grape-active_model_serializers"
 gem "grape-swagger-rails"
 gem "rack-cors", require: "rack/cors"
+gem 'hashie-forbidden_attributes'
 
 group :production do
   gem 'pg'
