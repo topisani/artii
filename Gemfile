@@ -26,6 +26,7 @@ gem 'active_model_serializers'
 gem "grape"
 gem "grape-active_model_serializers"
 gem "grape-swagger-rails"
+gem "grape-entity"
 gem "rack-cors", require: "rack/cors"
 gem 'hashie-forbidden_attributes'
 
