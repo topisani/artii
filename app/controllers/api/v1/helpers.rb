@@ -16,13 +16,13 @@ module API
       end
 
       def permitted_params
-        @permitted_params ||= declared(params, include_missing: false)
+        @permitted_params ||= declared(params, include_missing: false).exclude(:token)
       end
 
       def logger
         Rails.logger
       end
-      
+
     end
   end
 end
