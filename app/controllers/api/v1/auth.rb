@@ -4,7 +4,7 @@ module API
       include API::V1::Defaults
 
       desc "Opperations related to authentication"
-      resource :auth do
+      resource :auth, desc: "Log in/out" do
 
         desc "Creates and returns access_token if valid login"
         params do

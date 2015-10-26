@@ -27,7 +27,7 @@ module API
         end
         post "" do
           authenticate!
-          Picture.create( image: permitted_params[:image], name: permitted_params[:name], user: current_user )
+          Picture.create(permitted_params)
         end
       end
     end

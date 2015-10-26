@@ -182,6 +182,7 @@ DEPENDENCIES
   carrierwave!
   grape
   grape-active_model_serializers
+  grape-entity
   grape-swagger-rails
   hashie-forbidden_attributes
   informant-rails
