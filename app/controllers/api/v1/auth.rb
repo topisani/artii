@@ -27,13 +27,21 @@ module API
           end
         end
 
-        desc "Returns pong if logged in correctly"
+        desc "Returns pong if logged in correctly. Authentication test"
         params do
           requires :token, type: String, desc: "Access token."
         end
         get :ping do
           authenticate!
           { message: "pong" }
+        end
+
+        desc "Invalidates the given token"
+        params do
+          requires :token, type: String, desc: "Token to invalidate"
+        end
+        delete do
+          ApiKey.where(access_token: params[:token]).first.destroy();
         end
       end
     end

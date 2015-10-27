@@ -16,7 +16,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   after :remove, :delete_empty_upstream_dirs
   process convert: 'jpg'
   def store_dir
-    "uploads/users/#{model.user.id.to_s.underscore}/#{model.class.to_s.underscore}/#{model.id}"
+    "uploads/users/#{model.user.id.to_s.downcase}/#{model.class.to_s.downcase}/#{model.id}"
   end
 
   def default_url

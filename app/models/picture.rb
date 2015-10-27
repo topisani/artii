@@ -7,6 +7,5 @@ class Picture < ActiveRecord::Base
 
 
   mount_uploader :image, ImageUploader
-
   validates :user, presence: true
 end

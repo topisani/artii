@@ -8,7 +8,7 @@ module API
           requires :username, type: String, desc: "Username of user to get pictures for"
         end
         get "user/:username", root: "pictures" do
-          User.where(username: permitted_params[:username]).first.pictures.all
+          User.where(username: params[:username]).first.pictures.all
         end
 
         #TODO: Are you allowed to access this picture?
@@ -27,7 +27,7 @@ module API
         end
         post "" do
           authenticate!
-          Picture.create(permitted_params)
+          current_user.pictures.new(permitted_params)
         end
       end
     end
