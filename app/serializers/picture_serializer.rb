@@ -1,6 +1,9 @@
 class PictureSerializer < ActiveModel::Serializer
-  attributes :id, :name, :created_at, :user
+  attributes :id, :name, :created_at, :user, :image
   def user
-    UserSerializer.new( object.user ).attributes
+    {id: object.user.id}
+  end
+  def image
+    {url: object.image.url()}
   end
 end

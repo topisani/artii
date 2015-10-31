@@ -11,12 +11,11 @@ class ImageUploader < CarrierWave::Uploader::Base
     "250" => 256,
     "100" => 128
   }
-
   storage :file
   after :remove, :delete_empty_upstream_dirs
   process convert: 'jpg'
   def store_dir
-    "uploads/users/#{model.user.id.to_s.downcase}/#{model.class.to_s.downcase}/#{model.id}"
+    "#{Rails.root}/system/uploads/users/#{model.user.id.to_s.downcase}/#{model.class.to_s.downcase.pluralize}/#{model.id}"
   end
 
   def default_url
@@ -45,6 +44,8 @@ class ImageUploader < CarrierWave::Uploader::Base
         i.crop "#{size}x#{size}+0+0"
       end
     end
+
+    Rail.logger.debug current_path
   end
 
   def resize_to_min(s)

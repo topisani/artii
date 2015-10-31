@@ -17,17 +17,18 @@ module API
           requires :id, type: Integer, desc: "ID of picture"
         end
         get ":id", root: "picture" do
-          Picture.find(permitted_params[:id]).first!
+          Picture.find(params[:id])
         end
 
+        desc "Upload a new picture"
         params do
           requires :token, type: String, desc: "Authentication token"
-          requires :image, type: File, desc: "Image file"
+          optional :image, type:  Rack::Multipart::UploadedFile, desc: "Image file"
           optional :name, type: String, desc: "Name for picture"
         end
         post "" do
           authenticate!
-          current_user.pictures.new(permitted_params)
+          current_user.pictures.create(permitted_params)
         end
       end
     end

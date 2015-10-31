@@ -5,7 +5,7 @@ class Picture < ActiveRecord::Base
   has_many :artworks, through: :artwork_pictures
   has_many :posts, through: :post_pictures
 
-
   mount_uploader :image, ImageUploader
+  
   validates :user, presence: true
 end
